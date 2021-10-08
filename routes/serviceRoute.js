@@ -4,7 +4,9 @@ const Service = require('../models/Service')
 const User = require('../models/User')
 const router = express.Router()
 
-//get single service
+//add single service
+// post request
+// /api/v1/add
 router.post('/add', requireSignIn, async (req, res, next) => {
     const _user = req.user
     try {
@@ -41,7 +43,36 @@ router.post('/add', requireSignIn, async (req, res, next) => {
     }
 })
 
-router.patch('edit/:id', (req, res, next) => {
+//get sinlge service
+// get request
+// /api/v1/single/:id
+router.get('/single/:id', async (req,res, next)=>{
+    try {
+        const {id} = req.params
+        Service.findOne({_id: id}).then(async (service)=>{
+            const user = await User.findOne({_id: service.owner})
+            return res.status(200).json({service: {
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                price: service.price,
+                price_type: service.price_type,
+                description: service.description,
+                tags: service.tags,
+                createdAt: service.createdAt,
+                owner: service.owner,
+                _id: service._id
+            }})
+        })
+        
+    } catch (error) {
+        next(error)
+    }
+})
+
+//edit sinlge service
+// patch request
+// api/v1/edit/:id
+router.patch('edit/:id', async (req, res, next) => {
     try {
         const updateQuery = req.body
         const _new_service = await Service.updateOne(
