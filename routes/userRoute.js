@@ -1,11 +1,12 @@
 const express = require('express')
 const { edit_User_Info, get_Single_user, get_All_Sellers, get_ALl_Clients, deleteUser } = require('../controllers/userControllers')
+const { requireSignIn } = require('../middleware')
 const router = express.Router()
 
 //esit user info
 // /api/v1/patch
 // patch rquest
-router.patch('/edit/:id', edit_User_Info)
+router.patch('/edit/:id',requireSignIn, edit_User_Info)
 
 //get request
 //get single suer

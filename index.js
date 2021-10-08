@@ -27,6 +27,7 @@ connectDB()
 
 //user define droutes
 app.use('/api/v1/auth', require('./routes/authRoute'))
+app.use('/api/v1/user', require('./routes/userRoute'))
 
 //basic get route
 app.get('/', (req, res) => {
