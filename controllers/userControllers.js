@@ -124,7 +124,9 @@ exports.get_ALl_Clients = async (req, res, next) => {
 // api/v1/user/delte/:id
 exports.deleteUser = async (req, res, next) => {
     try {
-        console.log('delte user info')
+        const { id } = req.params
+        const _deleted = await User.deleteOne({ _id: id })
+        return res.status(200).json({ message: "Account deleted", _deleted })
     } catch (error) {
         next(error)
     }

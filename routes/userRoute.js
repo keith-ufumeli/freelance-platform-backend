@@ -26,6 +26,6 @@ router.get('/clients', get_ALl_Clients)
 //delte user info
 // delte request
 // api/v1/user/delte/:id
-router.delete('/delete/:id', deleteUser)
+router.delete('/delete/:id',requireSignIn, deleteUser)
 
 module.exports = router
