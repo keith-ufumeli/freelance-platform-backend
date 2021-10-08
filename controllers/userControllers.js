@@ -38,7 +38,9 @@ exports.get_Single_user = async (req, res, next) => {
                 posts: _user.posts,
                 verified: _user.verified,
                 photoURL: _user.photoURL,
-                _id: _user._id
+                _id: _user._id,
+                services: _user.services,
+                jobs: _user.jobs
             }
         })
     } catch (error) {
