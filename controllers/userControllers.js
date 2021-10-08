@@ -1,8 +1,7 @@
-//esit user info
-// /api/v1/patch
-
 const User = require("../models/User");
 
+//esit user info
+// /api/v1/patch
 // patch rquest
 exports.edit_User_Info = async (req, res, next) => {
     try {
@@ -53,7 +52,32 @@ exports.get_Single_user = async (req, res, next) => {
 // api/v1/user/sellers
 exports.get_All_Sellers = async (req, res, next) => {
     try {
-        console.log('get all sellers')
+        const users_array = []
+        await User.find({ seller: true }).then(users => {
+            users.forEach(user => {
+                users_array.push({
+                    displayName: user.displayName,
+                    email: user.email,
+                    yearOfBirth: user.yearOfBirth,
+                    address: user.address,
+                    bio: user.bio,
+                    gender: user.gender,
+                    photoURL: user.photoURL,
+                    verified: user.verified,
+                    phoneNumber: user.phoneNumber,
+                    posts: user.posts,
+                    seller: user.seller,
+                    client: user.client,
+                    createdAt: user.createdAt,
+                    _id: user._id,
+                    services: user.services,
+                    jobs: user.jobs
+                })
+            })
+            return res.status(200).json({ sellers: users_array })
+        }).catch(error => {
+            return res.send(500).json(error)
+        })
     } catch (error) {
         next(error)
     }

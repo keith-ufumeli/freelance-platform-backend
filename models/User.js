@@ -7,6 +7,14 @@ const UserSchema = new mongoose.Schema({
         default: '',
         unique: true
     },
+    seller: {
+        type: Boolean,
+        default: false
+    },
+    client:{
+        type: Boolean,
+        default: false
+    },
     email: {
         type: String,
         required: true,
