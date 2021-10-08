@@ -88,7 +88,32 @@ exports.get_All_Sellers = async (req, res, next) => {
 // a/api/v1/user/clients
 exports.get_ALl_Clients = async (req, res, next) => {
     try {
-        console.log('get all clients')
+        const users_array = []
+        await User.find({ client: true }).then(users => {
+            users.forEach(user => {
+                users_array.push({
+                    displayName: user.displayName,
+                    email: user.email,
+                    yearOfBirth: user.yearOfBirth,
+                    address: user.address,
+                    bio: user.bio,
+                    gender: user.gender,
+                    photoURL: user.photoURL,
+                    verified: user.verified,
+                    phoneNumber: user.phoneNumber,
+                    posts: user.posts,
+                    seller: user.seller,
+                    client: user.client,
+                    createdAt: user.createdAt,
+                    _id: user._id,
+                    services: user.services,
+                    jobs: user.jobs
+                })
+            })
+            return res.status(200).json({ clients: users_array })
+        }).catch(error => {
+            return res.send(500).json(error)
+        })
     } catch (error) {
         next(error)
     }

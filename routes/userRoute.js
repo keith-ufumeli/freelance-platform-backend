@@ -21,7 +21,7 @@ router.get('/sellers', get_All_Sellers)
 //get all clients
 // get request
 // a/api/v1/user/clients
-router.get('clients', get_ALl_Clients)
+router.get('/clients', get_ALl_Clients)
 
 //delte user info
 // delte request
