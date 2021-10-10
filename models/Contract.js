@@ -46,6 +46,9 @@ const contractSchema = new mongoose.Schema({
     status: {
         type: String,
         default: 'pending'
+    },
+    period_of_contract:{
+        type: String
     }
 }, {
     timestamps: true

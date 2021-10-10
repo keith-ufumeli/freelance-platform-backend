@@ -8,7 +8,7 @@ router.post('/create/:id', requireSignIn, async (req, res, next) => {
     const { id } = req.params  //id of the user to receive
     const _user = req.user // the sender of the contract
     try {
-        const { firstname, lastname, title, company, email, phone_number, details, payment_type, payment_period, amount } = req.body
+        const { firstname, lastname, title, company, email, phone_number, details, payment_type, payment_period, amount, period_of_contract } = req.body
 
         //contract
         const new_contract = new Contract({
@@ -23,7 +23,8 @@ router.post('/create/:id', requireSignIn, async (req, res, next) => {
             details,
             payment_type,
             payment_period,
-            amount
+            amount,
+            period_of_contract
         })
 
         // save contrat and push to user documents
