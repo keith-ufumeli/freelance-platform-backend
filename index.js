@@ -32,6 +32,7 @@ app.use('/api/v1/service', require('./routes/serviceRoute'))
 app.use('/api/v1/job', require('./routes/jobRoutes'))
 app.use('/api/v1/proposal', require('./routes/proposalRoute'))
 app.use('/api/v1/chat', require('./routes/chatRuote'))
+app.use('/api/v1/contract', require('./routes/contractRoute'))
 
 //basic get route
 app.get('/', (req, res) => {

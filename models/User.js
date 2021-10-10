@@ -67,7 +67,7 @@ const UserSchema = new mongoose.Schema({
     },
     jobs: Array,
     chatrooms: Array,
-    requests: Array,
+    contracts: Array,
     liked_posts: Array,
     messaged: Array
 }, {
