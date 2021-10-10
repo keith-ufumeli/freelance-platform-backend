@@ -68,10 +68,10 @@ exports.loginUser = async (req, res, next) => {
                         posts: _user.post,
                         address: _user.address,
                         yearOfBirth: _user.yearOfBirth,
-                        friends: _user.friends,
                         chats: _user.chats,
-                        posts: _user.posts,
-                        _id: _user._id
+                        _id: _user._id,
+                        seller: _user.seller,
+                        service: _user.service
                     }, process.env.JWT_SECRET)
                     if (token) {
                         const user = {
@@ -84,10 +84,10 @@ exports.loginUser = async (req, res, next) => {
                             posts: _user.post,
                             address: _user.address,
                             yearOfBirth: _user.yearOfBirth,
-                            friends: _user.friends,
                             chats: _user.chats,
-                            posts: _user.posts,
-                            _id: _user._id
+                            _id: _user._id,
+                            seller: _user.seller,
+                            service: _user.service
                         }
                         global.io.sockets.emit('login-success', user)
                         return res.status(200).json({

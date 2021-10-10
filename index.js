@@ -29,6 +29,9 @@ connectDB()
 app.use('/api/v1/auth', require('./routes/authRoute'))
 app.use('/api/v1/user', require('./routes/userRoute'))
 app.use('/api/v1/service', require('./routes/serviceRoute'))
+app.use('/api/v1/job', require('./routes/jobRoutes'))
+app.use('/api/v1/proposal', require('./routes/proposalRoute'))
+app.use('/api/v1/chat', require('./routes/chatRuote'))
 
 //basic get route
 app.get('/', (req, res) => {

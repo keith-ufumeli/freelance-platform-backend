@@ -3,7 +3,7 @@ const User = require("../models/User")
 
 //add single service
 // post request
-// /api/v1/add
+// /api/v1/service/add
 exports.createA_Service = async (req, res, next) => {
     const _user = req.user
     try {
@@ -25,7 +25,7 @@ exports.createA_Service = async (req, res, next) => {
         })
 
         new_service.save().then(async (response) => {
-            await User.findByIdAndUpdate({ _id: _user._id }, { $push: { services: response._id } })
+            await User.findOneAndUpdate({ _id: _user._id }, { seller: true, service: response._id })
             global.io.sockets.emit('service', response)
             return res.status(200).json({ message: 'Service Info saved' })
         }).catch(err => {

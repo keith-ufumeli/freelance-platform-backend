@@ -62,7 +62,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    services: Array,
+    service:{
+        type: String
+    },
     jobs: Array,
     chatrooms: Array,
     requests: Array,
