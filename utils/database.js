@@ -2,9 +2,10 @@ const consola = require('consola')
 const mongoose = require('mongoose')
 
 const database_Url = `mongodb://localhost:27017/Daypitch`
+const PROD_DB = process.env.DATABASE_URL
 
 const connectDB = () => {
-    mongoose.connect(database_Url, {})
+    mongoose.connect(PROD_DB, {})
     // mongoose.connection.on('connected', (err) => {
     //     if (err) {
     //         consola.error(err)

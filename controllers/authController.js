@@ -11,7 +11,7 @@ exports.regsiterUser = async (req, res, next) => {
         return res.status(422).json({ error: "Passwords do not match" })
     }
     try {
-        const _user = await User.findOne({ $or: [{ email: email }, { displayName: username }] })
+        const _user = await User.findOne({ email: email }).select("+password")
         if (_user) {
             return res.status(422).json({ error: "Account already exists" })
         }
@@ -52,7 +52,7 @@ exports.loginUser = async (req, res, next) => {
         if (!password) {
             return res.status(400).json({ error: "Enter All Fields" })
         } else {
-            const _user = await User.findOne({ email: email })
+            const _user = await User.findOne({ email: email }).select('+password')
             if (!_user) {
                 return res.status(404).json({ error: 'Account does not exist' })
             } else {
