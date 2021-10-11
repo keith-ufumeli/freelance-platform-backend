@@ -46,8 +46,25 @@ router.post('/create/:id', requireSignIn, async (req, res, next) => {
 })
 
 //gert all user contracts
-router.get('/user/:id', requireSignIn, async (req, res, next) => {
+router.get('/user', requireSignIn, async (req, res, next) => {
+    const {status} = req.body
+    const _user = req.user
+    try {
+        const _contracts = await Contract.find({sent_to: _user._id, status: status})
+        res.status(200).json({contracts: _contracts})
+    } catch (error) {
+        next(error)
+    }
+})
 
+router.get('/single/:id', requireSignIn, async (req, res, next)=>{
+    const {id} = req.params
+    try {
+        const _contract = await Contract.find({_id: id})
+        return res.status(200).json({contract: _contract})
+    } catch (error) {
+        next(error)
+    }
 })
 
 module.exports = router
