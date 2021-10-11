@@ -58,5 +58,6 @@ const serviceSchema = new mongoose.Schema({
 },{
     timestamps: true
 })
+serviceSchema.index({description: 'text'});
 
 module.exports = mongoose.model('Service', serviceSchema)

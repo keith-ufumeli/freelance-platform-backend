@@ -33,8 +33,14 @@ exports.create_A_JOb = async (req, res, next) => {
 }
 
 exports.explore_ALL_JObs = async (req, res, next) => {
+    const {search} = req.body
     try {
-        const _jobs = await Jobs.find({})
+        var _jobs
+        if(search === ''){
+            _jobs = await Jobs.find({})
+        }else{
+            _jobs = await Jobs.find({ $text: { $search: search } })
+        }
         return res.status(200).json({jobs: _jobs})
     } catch (error) {
         next(error)

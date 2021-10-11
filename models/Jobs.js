@@ -55,4 +55,6 @@ const JobsSchema = new mongoose.Schema({
     timestamps: true
 })
 
+JobsSchema.index({title: 'text', description: 'text'});
+
 module.exports = mongoose.model('Job', JobsSchema)

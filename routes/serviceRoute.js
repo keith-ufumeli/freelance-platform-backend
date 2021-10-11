@@ -23,9 +23,15 @@ router.patch('/edit/:id', edit_A_Service)
 //get all services
 // gert rewquest
 // /api/v1/service/all
-router.get('/all', async (req, res, next) => {
+router.post('/all', async (req, res, next) => {
+    const { search } = req.body
     try {
-        const _services = await Service.find({})
+        var _services
+        if (search === '') {
+            _services = await Service.find({})
+        } else {
+            _services = await Service.find({ $text: { $search: search } })
+        }
         const all_services = []
         for (var i = 0; i < _services.length; i++) {
             const _service_user = await User.findOne({ _id: _services[i].owner })

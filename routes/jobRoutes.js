@@ -13,7 +13,7 @@ router.post('/create', requireSignIn, create_A_JOb)
 // get all jobs 
 //get request
 // /api/v1/job/all
-router.get('/all', explore_ALL_JObs)
+router.post('/all', explore_ALL_JObs)
 
 // edit a job
 router.patch('/edit/:id', editA_JOb)
