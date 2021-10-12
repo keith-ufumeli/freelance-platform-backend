@@ -47,21 +47,33 @@ router.post('/create/:id', requireSignIn, async (req, res, next) => {
 
 //gert all user contracts
 router.get('/user', requireSignIn, async (req, res, next) => {
-    const {status} = req.body
+    const { status } = req.body
     const _user = req.user
     try {
-        const _contracts = await Contract.find({sent_to: _user._id})
-        res.status(200).json({contracts: _contracts})
+        const _contracts = await Contract.find({ sent_to: _user._id })
+        res.status(200).json({ contracts: _contracts })
     } catch (error) {
         next(error)
     }
 })
 
-router.get('/single/:id', requireSignIn, async (req, res, next)=>{
-    const {id} = req.params
+router.get('/single/:id', requireSignIn, async (req, res, next) => {
+    const { id } = req.params
     try {
-        const _contract = await Contract.findOne({_id: id})
-        return res.status(200).json({contract: _contract})
+        const _contract = await Contract.findOne({ _id: id })
+        return res.status(200).json({ contract: _contract })
+    } catch (error) {
+        next(error)
+    }
+})
+
+//respons to a contract
+router.patch('/response/:id', requireSignIn, async (req, res, next) => {
+    const { id } = req.params
+    const { status, signed } = req.body
+    try {
+        const new_contract = await Contract.findByIdAndUpdate({ _id: id }, { status: 'reacted', signed: signed })
+        res.status(200).json({ contract: new_contract })
     } catch (error) {
         next(error)
     }
