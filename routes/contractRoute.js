@@ -50,7 +50,7 @@ router.get('/user', requireSignIn, async (req, res, next) => {
     const {status} = req.body
     const _user = req.user
     try {
-        const _contracts = await Contract.find({sent_to: _user._id, status: status})
+        const _contracts = await Contract.find({sent_to: _user._id})
         res.status(200).json({contracts: _contracts})
     } catch (error) {
         next(error)
@@ -60,7 +60,7 @@ router.get('/user', requireSignIn, async (req, res, next) => {
 router.get('/single/:id', requireSignIn, async (req, res, next)=>{
     const {id} = req.params
     try {
-        const _contract = await Contract.find({_id: id})
+        const _contract = await Contract.findOne({_id: id})
         return res.status(200).json({contract: _contract})
     } catch (error) {
         next(error)
