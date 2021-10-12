@@ -106,7 +106,7 @@ exports.get_Chat_Rooms = async (req, res, next) => {
                 user_picture: user_info.photoURL,
                 user: all_chats_rooms[i].last_sent_by,
                 chat_users: all_chats_rooms[i].users,
-                sent_by_you: sent_by_you
+                user_id: user_info._id
             })
             chats.push(new_chat)
         }
