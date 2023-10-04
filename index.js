@@ -36,7 +36,7 @@ app.use('/api/v1/contract', require('./routes/contractRoute'))
 
 //basic get route
 app.get('/', (req, res) => {
-  res.json({ message: 'daypitch API by Tatenda Bako' })
+  res.json({ message: 'daypitch API by Keith Ufumeli' })
 })
 
 //not found handler
